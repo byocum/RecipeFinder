@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\byocu\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\byocu\\.nuget\\packages"
+    ]
+  }
+}

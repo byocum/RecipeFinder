@@ -1,0 +1,133 @@
+﻿@model RecipeFinder.Models.ViewModels.PickIngredientsViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*@addTagHelper *, AuthoringTagHelpers*@
+@{
+    ViewBag.Title = "Use The Ingredients You Have";
+}
+
+<title>@ViewBag.Title</title>
+
+<header>
+    <div class="center homeTitle">
+        <p class="titleText textUnderline">USE THE INGREDIENTS YOU HAVE!</p>
+
+        <p class="subtitleText centerText">
+            FIND RECIPIES WITH THE INGREDIENTS IN YOUR KITCHEN
+        </p>
+    </div>
+</header>
+
+@using (Html.BeginForm())
+{
+<section class="ml-3 mr-3">
+    <label class="formLabel">PICK INGREDIENT</label>
+    <div class="input-group">
+        @Html.TextBoxFor(m => m.SelectedIngredient, new { autocomplete = "off", list = "dlSelectIngredient", @class = "form-control" })
+        <div class="input-group-prepend">
+            <button id="btnSelectIngredient" name="btnSelectIngredient" class="btn btn-outline-secondary" type="submit" formaction="@Url.Action("PickIngredients")">SELECT</button>
+        </div>
+
+        <datalist id="dlSelectIngredient">
+            @{
+                foreach (var ingredient in @Model.Ingredients)
+                {
+                    <option name="SelectedIngredients" value="@ingredient.NamePlural"></option>
+
+                }
+            }
+        </datalist>
+
+    </div>
+    @Html.ValidationMessageFor(m => m.SelectedIngredient, null, new { @class = "errorMessage" })
+
+
+    <button type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction ="@Url.Action("RecipeList", "Recipe")">FIND RECIPE</button>
+    @Html.ValidationMessageFor(m => m.SelectedIngredients, null, new { @class = "errorMessage" })
+
+    <div class="container">
+        @{
+            @:<div class="row">
+
+
+                var count = 1;
+                @Html.ValidationMessageFor(p => p.SelectedIngredients);
+
+                if (@Model.SelectedIngredients != null)
+                {
+                    for (var index = 0; @Model.SelectedIngredients.Count() > index; index++)
+                    {
+                        if (count > 3)
+                        {
+                            count = 1;
+                        @:</div>
+                        @:<div class="row">
+                        }
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 div-list grey-gradient">
+                                <label for="btnIngredientName" name="lblSelectedIngredient">
+                                    @Model.SelectedIngredients[index].NamePlural
+                                    @Html.HiddenFor(m => m.SelectedIngredients[index].IngredientNameId)
+                                    @Html.HiddenFor(m => m.SelectedIngredients[index].NamePlural)
+                                    @Html.HiddenFor(m => m.SelectedIngredients[index].RecipeIngredients)
+                                </label>
+                                <button class="grey-gradient" id="btnIngredientName" name="btnIngredientName" formaction=@Url.Action("DeleteIngredientFromSearch") formmethod="post" value="@Model.SelectedIngredients[index].NamePlural">X</button>
+                            </div>
+                        </div>
+
+                        count++;
+                    }
+                }
+
+            @:</div>
+        }
+
+    </div>
+
+    <button type="submit" class="btn btn-light btn-block" formaction ="@Url.Action("RecipeList", "Recipe")" style="margin-top:10px">FIND RECIPE</button>
+</section>
+}
+
+@*<script>
+        $(function () {
+
+            $('#btnSelectIngredient').on('click', function () {
+                var val = document.getElementById('txtSelectIngredient').value;
+                var opts = document.getElementById('dlSelectIngredient').childNodes;
+                var isAnOption = false;
+                for (var i = 0; i < opts.length; i++) {
+                    if (opts[i].value === val) {
+                        // An item was selected from the list!
+                        // yourCallbackHere()
+                        isAnOption = true;
+                        break;
+                    }
+                }
+
+                if (isAnOption) {
+                    alert(val);
+                    return false;
+                } else {
+                    alert(val + " is not an ingredient option.")
+                    return false;
+                }
+            });
+
+            $('#txtSelectIngredient').keypress(function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    $('#btnSelectIngredient').click();
+                    return false;
+                }
+            });
+
+            $('#dlSelectIngredient').on('click', function () {
+                $('#btnSelectIngredient').click();
+                return false;
+            });
+
+
+        });
+    </script>*@
+
+
+

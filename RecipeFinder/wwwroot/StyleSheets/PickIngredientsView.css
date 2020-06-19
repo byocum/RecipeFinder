@@ -1,0 +1,256 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.errorMessage {
+    color: #FF0000;
+}
+
+/*--- navigation bar ---*/
+.navbar {
+    background: #6ab446;
+}
+
+.nav-link,
+.navbar-brand {
+    color: #fff;
+    cursor: pointer;
+}
+
+.navbar img {
+    width: 20%;
+}
+
+.nav-link {
+    margin-right: 1em !important;
+}
+
+    .nav-link:hover {
+        color: #000;
+    }
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.pageMargin{
+    margin:10px 36px 10px 14px;
+}
+
+.center {
+    margin: 0 auto;
+    padding: 20px 0px 20px 0px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.titleText {
+    font-family: Georgia, Garamond, Times New Roman, Times, serif;
+    font-size: 1.9em;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.subtitleText {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.1em;
+}
+
+.feature .subtitleText {
+    color: #4a4a4a;
+}
+
+    .feature .subtitleText:hover {
+        color: #878787;
+    }
+
+.feature a:hover {
+    text-decoration: none;
+}
+
+.textUnderline {
+    border-bottom: 1px solid #000;
+}
+
+.homeTitle {
+    width: 546px;
+}
+
+.homeForm {
+    width: 90%;
+}
+
+label {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+.list_no_bullets{
+    list-style-type:none;
+}
+
+.btn-light {
+    background-color: #6ab446;
+    border-radius: 11px;
+    color: #fff;
+}
+
+    .btn-light:hover {
+        background-color: #73ba4f;
+        color: #fff;
+    }
+
+.div-list {
+    padding: 5px;
+}
+
+.grey-gradient {
+    background-image: linear-gradient(#F8F8F8, #ECECEC);
+}
+
+.div-list button {
+    border-style: none;
+    float: right;
+}
+
+@media only screen and (max-width: 600px) {
+    .center {
+        width: 400px;
+    }
+
+    .titleText {
+        font-size: 1.8em;
+    }
+
+    .subtitleText {
+        font-size: 1em;
+    }
+}
+/* Recipe List View */
+
+.sectionButton{
+    background:#fff;
+    border:none;
+    text-align:left;
+}
+
+    .sectionButton:focus {
+        outline: none;
+    }
+
+/* Recipe Detail View*/
+
+.header-image {
+    background-image: url('images/IMG_8560.JPG');
+    background-size: cover;
+}
+/*.header {
+    /*background-image: url('../Images/IMG_8431_cropped.jpg');
+    /*background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header-box {
+    min-width: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.description {
+    left: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+}
+
+    .description h1 {
+        color: #6ab446;
+    }
+
+    .description p {
+        color: #fff;
+        font-size: 1.3rem;
+        line-height: 1.5;
+    }
+
+    .description button {
+        border: 1px solid #6ab446;
+        background: #6ab446;
+        border-radius: 0;
+        color: #fff;
+    }
+
+        .description button:hover {
+            border: 1px solid #fff;
+            background: #fff;
+            color: #000;
+        }
+
+.features {
+    margin: 4em auto;
+    padding: 1em;
+    position: relative;
+}
+
+.feature-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.features img {
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 16px;
+}
+
+.features .form-control,
+.features input {
+    border-radius: 0;
+}
+
+.features .btn {
+    background-color: #589b37;
+    border: 1px solid #589b37;
+    color: #fff;
+    margin-top: 20px;
+}
+
+    .features .btn:hover {
+        background-color: #333;
+        border: 1px solid #333;
+    }
+
+.page-footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 60px 0 30px;
+}
+
+.footer-copyright {
+    color: #666;
+    padding: 40px 0;
+}*/
