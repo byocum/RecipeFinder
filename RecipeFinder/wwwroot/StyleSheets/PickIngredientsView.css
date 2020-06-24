@@ -18,6 +18,7 @@
 .navbar-brand {
     color: #fff;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 .navbar img {
@@ -33,11 +34,11 @@
     }
 
 .navbar-collapse {
-    justify-content: flex-end;
+    justify-content: flex-end;nav
 }
 
 .pageMargin{
-    margin:10px 36px 10px 14px;
+    margin:10px 36px 10px 36px;
 }
 
 .center {
@@ -59,6 +60,7 @@
 .subtitleText {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.1em;
+    margin-top:10px;
 }
 
 .feature .subtitleText {
@@ -73,6 +75,13 @@
     text-decoration: none;
 }
 
+.leftColumnGutter {
+    padding-right: 20px
+}
+
+.rightColumnGutter {
+    padding-left: 20px
+}
 .textUnderline {
     border-bottom: 1px solid #000;
 }
@@ -125,6 +134,10 @@ input {
 @media only screen and (max-width: 600px) {
     .center {
         width: 400px;
+    }
+
+    .homeTitle{
+        text-align:center;
     }
 
     .titleText {

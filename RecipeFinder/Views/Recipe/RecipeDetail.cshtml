@@ -7,8 +7,11 @@
             <p class="titleText">@Html.DisplayFor(model => model.Name)</p>
         </header>
         <article>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 order-lg-1 order-2">
+            <div class="row d-block">
+                <div class="col-lg-8 col-md-8 col-sm-12 float-right rightColumnGutter">
+                    <img class="img-fluid" src="~/Images/@Model.Picture" />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 float-left leftColumnGutter">
                     <p class="subtitleText">DETAILS</p>
                     <dl class="row">
                         <dt class="col-sm-2">
@@ -52,15 +55,9 @@
                     }
 
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 order-lg-2 order-1">
-                    <img class="img-fluid" src="~/Images/@Model.Picture" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 order-lg-1 order-2">
-                    This is the blank div
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 order-lg-2 order-1">
+
+
+                <div class="col-lg-8 col-md-8 col-sm-12 float-right">
                     <p class="subtitleText">DIRECTIONS</p>
                     <div>
                         @foreach (string line in ViewBag.RecipeDirections)
@@ -69,6 +66,9 @@
                             <br />
                         }
                     </div>
+                </div>                
+                <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+                    This is the blank div
                 </div>
             </div>
         </article>
