@@ -17,8 +17,4 @@
     <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\Images\IMG_8560.JPG" />
-  </ItemGroup>
-
 </Project>

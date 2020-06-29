@@ -29,7 +29,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-12">
 
                                 <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" style="display:block;" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId" target="_blank">
-                                        <img class="img-fluid" src="~/Images/IMG_8431_cropped.jpg" />
+                                        <img class="img-fluid" src="~/Images/Recipe/@recipe.Picture" />
                                         <h4>@Html.DisplayFor(r => recipe.Name)</h4>
                                         <h7>@Html.DisplayFor(r => recipe.PercentIngredientMatch) Ingredient Match</h7>
                                 </a>

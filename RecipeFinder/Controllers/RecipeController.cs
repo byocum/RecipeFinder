@@ -92,7 +92,7 @@ namespace RecipeFinder.Controllers
               .ThenInclude(ri => ri.Ingredient)
               .SingleOrDefault();
 
-            string[] recipeDirections = System.IO.File.ReadAllLines("wwwroot/RecipeDirections/SwissSteakDirections.txt");
+            string[] recipeDirections = System.IO.File.ReadAllLines("wwwroot/RecipeDirections/" + recipeModel.Directions);
                 ViewBag.RecipeDirections = recipeDirections;
 
             return View(recipeModel);
