@@ -4,15 +4,15 @@
 <body>
     <div class="container-fluid feature">
         <header>
-            @*<ol class="breadcrumb">
-                <li><a asp-action="Edit" asp-route-id= href="#">Home</a></li>
-                <li><a href="#">Recipe List</a></li>
-            </ol>*@
             <p class="titleText">Recipies</p>
+            <span class="errorMessage">@TempData["NoRecipiesError"]</span>
         </header>
         <form asp-action="RecipeDetail" asp-controller="Recipe" method="get">
             @{
                 @:<div class="row">
+
+
+
 
                     var count = 1;
 
@@ -28,10 +28,10 @@
                             }
                             <div class="col-lg-4 col-md-4 col-sm-12">
 
-                                <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" style="display:block;" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId" target="_blank">
-                                        <img class="img-fluid" src="~/Images/IMG_8431_cropped.jpg" />
-                                        <h4>@Html.DisplayFor(r => recipe.Name)</h4>
-                                        <h7>@Html.DisplayFor(r => recipe.PercentIngredientMatch) Ingredient Match</h7>
+                                <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId" target="_blank">
+                                    <img class="img-fluid" src="~/Images/Recipe/@recipe.Picture" />
+                                    <p class="listImageHeading">@Html.DisplayFor(r => recipe.Name)</p>
+                                    <p class="listImageText">@Html.DisplayFor(r => recipe.PercentIngredientMatch) Ingredient Match</p>
                                 </a>
                             </div>
 

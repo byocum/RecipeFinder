@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title="Recipe Finder";
+    ViewBag.Title = "Recipe Finder";
 }
 
 <!DOCTYPE html>
@@ -17,7 +17,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md">
-        <img class="navbar-brand" src="~/Images/Recipe finder Icon.png" href="#" />
+        <a href="@Url.Action("PickIngredients", "Ingredient")">
+            <img class="navbar-brand" src="~/Images/FoodFinderLogo.png" />
+        </a>
         <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,5 +37,6 @@
 
     @RenderBody()
 
+    <footer class="footerCopyright">&copy; 2020 Briony Yocum</footer>
 </body>
 </html>
