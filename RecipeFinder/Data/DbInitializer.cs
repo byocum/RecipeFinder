@@ -38,6 +38,7 @@ namespace RecipeFinder.Data
                     new Ingredient{IngredientNameId="sausage", NamePlural="sausage"},
                     new Ingredient{IngredientNameId="chedder cheese", NamePlural="chedder cheese"},
                     new Ingredient{IngredientNameId="mozzarella cheese", NamePlural="mozzarella cheese"},
+                    new Ingredient{IngredientNameId="milk", NamePlural="milk"},
 
                 };
 

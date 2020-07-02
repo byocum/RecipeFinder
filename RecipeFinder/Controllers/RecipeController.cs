@@ -31,6 +31,7 @@ namespace RecipeFinder.Controllers
                 if (pickIngredientsViewModel.SelectedIngredients is null)
                 {
                     TempData["SelectedIngredientError"] = "No ingredients specified for search.";
+                    return RedirectToAction("PickIngredients", "Ingredient");
                 }
                 else
                 {
@@ -44,38 +45,45 @@ namespace RecipeFinder.Controllers
                                 .Distinct()
                                 .ToList();
 
-                    foreach (var recipe in recipeList)
+                    if (recipeList.Count < 1)
                     {
-                        RecipeListViewModel recipeToAdd = new RecipeListViewModel();
-
-                        recipeToAdd.RecipeId = recipe.RecipeId;
-                        recipeToAdd.Name = recipe.Name;
-                        recipeToAdd.Picture = recipe.Picture;
-                        recipeToAdd.Ingredients = recipe.RecipeIngredients.Select(i => i.Ingredient);
-
-                        var ingredientsInRecipeCount = recipeToAdd.Ingredients.Count();
-                        var selectedIngredientsInRecipeCount = 0;
-
-                        foreach (Ingredient ingredient in recipeToAdd.Ingredients)
+                        TempData["NoRecipiesError"] = "NO RECIPIES WERE FOUND THAT HAD THE INGREDIENTS YOU SELECTED.";
+                    }
+                        foreach (var recipe in recipeList)
                         {
-                            foreach (Ingredient selectedIngredient in pickIngredientsViewModel.SelectedIngredients)
+                            RecipeListViewModel recipeToAdd = new RecipeListViewModel();
+
+                            recipeToAdd.RecipeId = recipe.RecipeId;
+                            recipeToAdd.Name = recipe.Name;
+                            recipeToAdd.Picture = recipe.Picture;
+                            recipeToAdd.Ingredients = recipe.RecipeIngredients.Select(i => i.Ingredient);
+
+                            var ingredientsInRecipeCount = recipeToAdd.Ingredients.Count();
+                            var selectedIngredientsInRecipeCount = 0;
+
+                            foreach (Ingredient ingredient in recipeToAdd.Ingredients)
                             {
-                                if (ingredient.IngredientNameId == selectedIngredient.IngredientNameId)
+                                foreach (Ingredient selectedIngredient in pickIngredientsViewModel.SelectedIngredients)
                                 {
-                                    selectedIngredientsInRecipeCount++;
+                                    if (ingredient.IngredientNameId == selectedIngredient.IngredientNameId)
+                                    {
+                                        selectedIngredientsInRecipeCount++;
+                                    }
                                 }
                             }
+
+                            recipeToAdd.PercentIngredientMatch = selectedIngredientsInRecipeCount / (double)ingredientsInRecipeCount;
+
+                            recipeListViewModel.Add(recipeToAdd);
                         }
 
-                        recipeToAdd.PercentIngredientMatch = selectedIngredientsInRecipeCount / (double)ingredientsInRecipeCount;
+                        var recipeListViewOrdered = recipeListViewModel.OrderByDescending(r => r.PercentIngredientMatch);
 
-                        recipeListViewModel.Add(recipeToAdd);
+                        return View(recipeListViewOrdered);
                     }
-
-                    var recipeListViewOrdered = recipeListViewModel.OrderByDescending(r => r.PercentIngredientMatch);
-                    return View(recipeListViewOrdered);
                 }
-            }
+            
+
             return View();
         }
 
@@ -93,7 +101,7 @@ namespace RecipeFinder.Controllers
               .SingleOrDefault();
 
             string[] recipeDirections = System.IO.File.ReadAllLines("wwwroot/RecipeDirections/" + recipeModel.Directions);
-                ViewBag.RecipeDirections = recipeDirections;
+            ViewBag.RecipeDirections = recipeDirections;
 
             return View(recipeModel);
         }

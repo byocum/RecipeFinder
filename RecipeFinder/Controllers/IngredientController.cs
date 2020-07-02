@@ -150,12 +150,15 @@ namespace RecipeFinder.Controllers
                 else
                 {
                     pickIngredientsViewModel.SelectedIngredients.Remove(ingredientToDelete);
+                    var selectedIngredientsSerialized = JsonConvert.SerializeObject(pickIngredientsViewModel.SelectedIngredients);
+                    HttpContext.Session.SetString("SelectedIngredients", selectedIngredientsSerialized);
                 }
             }
 
             pickIngredientsViewModel.Ingredients = await _context.Ingredients
                                     .OrderBy(i => i.IngredientNameId)
                                     .ToListAsync();
+            ModelState.Clear();
 
             return View("PickIngredients", pickIngredientsViewModel);
         }

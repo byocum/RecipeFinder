@@ -1,13 +1,13 @@
 ﻿@model RecipeFinder.Models.Recipe
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<body>
+
     <div class="pageMargin">
         <header>
             <p class="titleText">@Html.DisplayFor(model => model.Name)</p>
         </header>
         <article>
-            <div class="row d-block">
+            <div class="row d-block" style="overflow:hidden;">
                 <div class="col-lg-8 col-md-8 col-sm-12 float-right rightColumnGutter">
                     <img class="img-fluid" src="~/Images/Recipe/@Model.Picture" />
                 </div>
@@ -42,12 +42,12 @@
                         {
                             if (recipeIngredient.IsIngredientNamePlural)
                             {
-                                @recipeIngredient.Amount @recipeIngredient.Ingredient.NamePlural;
+                                @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.NamePlural)
                                 @:<br />
                             }
                             else
                             {
-                                @recipeIngredient.Amount @recipeIngredient.Ingredient.IngredientNameId;
+                                @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.IngredientNameId);
                                 @:<br />
                             }
 
@@ -72,4 +72,4 @@
             </div>
         </article>
     </div>
-</body>
+
