@@ -27,7 +27,7 @@ namespace RecipeFinder.Data
                     new Ingredient{IngredientNameId="honey", NamePlural="honey"},
                     new Ingredient{IngredientNameId="cooking oil", NamePlural="cooking oil"},
                     new Ingredient{IngredientNameId="salt", NamePlural="salt"},
-                    new Ingredient{IngredientNameId="pepper", NamePlural="pepper"},
+                    new Ingredient{IngredientNameId="black pepper", NamePlural="black pepper"},
                     new Ingredient{IngredientNameId="egg", NamePlural="eggs"},
                     new Ingredient{IngredientNameId="bread crumb", NamePlural="bread crumbs"},
                     new Ingredient{IngredientNameId="spaghetti sauce", NamePlural="spaghetti sauce"},
@@ -38,6 +38,13 @@ namespace RecipeFinder.Data
                     new Ingredient{IngredientNameId="sausage", NamePlural="sausage"},
                     new Ingredient{IngredientNameId="chedder cheese", NamePlural="chedder cheese"},
                     new Ingredient{IngredientNameId="mozzarella cheese", NamePlural="mozzarella cheese"},
+                    new Ingredient{IngredientNameId="onion", NamePlural="onion"},
+                    new Ingredient{IngredientNameId="basil", NamePlural="basil"},
+                    new Ingredient{IngredientNameId="tomato", NamePlural="tomatos"},
+                    new Ingredient{IngredientNameId="kidney bean", NamePlural="kidney beans"},
+                    new Ingredient{IngredientNameId="tomato sauce", NamePlural="tomato sauce"},
+                    new Ingredient{IngredientNameId="chili powder", NamePlural="chili powder"},
+                    new Ingredient{IngredientNameId="pepper", NamePlural="pepper"},
                     new Ingredient{IngredientNameId="milk", NamePlural="milk"},
 
                 };
@@ -52,7 +59,8 @@ namespace RecipeFinder.Data
                 var recipies = new Recipe[]
                 {
                     new Recipe{Name="Apple and Chedder Kale Salad", Picture="AppleAndChedderKaleSalad.JPG", Directions="AppleAndChedderKaleSaladDirections.txt", PrepTime="15 min", Servings="4"},
-                    new Recipe{Name="Italian Style Meat Loaf", Picture="ItailianStyleMeatLoaf.JPG", Directions="ItalianStyleMeatLoafDirections.txt", PrepTime="15 min", BakeTime="30 min", Servings="6"}
+                    new Recipe{Name="Italian Style Meat Loaf", Picture="ItailianStyleMeatLoaf.JPG", Directions="ItalianStyleMeatLoafDirections.txt", PrepTime="15 min", BakeTime="30 min", Servings="6"},
+                    new Recipe{Name="Chili", Picture="Chili.JPG", Directions="ChiliDirections.txt", PrepTime="20 min", BakeTime="20 min", Servings="5"}
                 };
 
                 foreach (Recipe recipe in recipies)
@@ -139,7 +147,7 @@ namespace RecipeFinder.Data
                         },
                     new RecipeIngredient {
                         RecipeId = recipies.Single(r => r.Name == "Apple and Chedder Kale Salad" ).RecipeId,
-                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "pepper").IngredientNameId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "black pepper").IngredientNameId,
                         Amount = "to taste",
                         IsIngredientNamePlural=true
                         },
@@ -202,7 +210,67 @@ namespace RecipeFinder.Data
                         IngredientNameId = ingredients.Single(i => i. IngredientNameId== "cheese").IngredientNameId,
                         Amount = "instead of mozzarella cheese, optional other",
                         IsIngredientNamePlural=true
-                        }
+                        },
+                                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "beef").IngredientNameId,
+                        Amount = "1 lb ground",
+                        IsIngredientNamePlural=false
+                        },
+                                                            new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "onion").IngredientNameId,
+                        Amount = "1 cup chopped",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "pepper").IngredientNameId,
+                        Amount = "1/2 cup chopped green",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "garlic").IngredientNameId,
+                        Amount = "2 cloves",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "basil").IngredientNameId,
+                        Amount = "1/2 tsp. dried",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "tomato").IngredientNameId,
+                        Amount = "1 14 oz can",
+                        IsIngredientNamePlural=true
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "kidney bean").IngredientNameId,
+                        Amount = "1 15oz can dark red",
+                        IsIngredientNamePlural=true
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "tomato sauce").IngredientNameId,
+                        Amount = "1 8 oz can",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "chili powder").IngredientNameId,
+                        Amount = "2-3 tsp.",
+                        IsIngredientNamePlural=false
+                        },
+                        new RecipeIngredient {
+                        RecipeId = recipies.Single(r => r.Name == "Chili" ).RecipeId,
+                        IngredientNameId = ingredients.Single(i => i. IngredientNameId== "black pepper").IngredientNameId,
+                        Amount = "1/4 tsp.",
+                        IsIngredientNamePlural=false
+                        },
             };
 
                 foreach (RecipeIngredient recipeIngredient in recipieIngredients)
