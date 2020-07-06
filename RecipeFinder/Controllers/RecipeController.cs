@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using RecipeFinder.Data;
 using RecipeFinder.Models;
 using RecipeFinder.Models.ViewModels;
+using Newtonsoft.Json;
 
 namespace RecipeFinder.Controllers
 {
@@ -19,13 +21,37 @@ namespace RecipeFinder.Controllers
             _context = context;
         }
 
+        public ViewResult RecipeList()
+        {
+            List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
+            var selectedIngredientsSession = HttpContext.Session.GetString("SelectedIngredients");
+
+
+            if (!string.IsNullOrEmpty(selectedIngredientsSession))
+            {
+                List<Ingredient> selectedIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(selectedIngredientsSession);
+
+                recipeListViewModel =  CreateRecipeList(selectedIngredients);
+
+                return View(recipeListViewModel);
+            }
+            else
+            {
+                TempData["NoRecipiesError"] = "NO RECIPIES WERE FOUND.";
+            }
+
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RecipeList()
+        [ActionName("RecipeList")]
+        public async Task<IActionResult> RecipeList_Post()
         {
-            List<Ingredient> searchIngredients = new List<Ingredient>();
             List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
             PickIngredientsViewModel pickIngredientsViewModel = new PickIngredientsViewModel();
+
             if (await TryUpdateModelAsync<PickIngredientsViewModel>(pickIngredientsViewModel))
             {
                 if (pickIngredientsViewModel.SelectedIngredients is null)
@@ -36,55 +62,62 @@ namespace RecipeFinder.Controllers
                 else
                 {
 
-                    List<Recipe> recipeList = _context.RecipeIngredients
-                                .Where(ri => pickIngredientsViewModel.SelectedIngredients.Contains(ri.Ingredient))
-                                .Include(ri => ri.Recipe)
-                                .ThenInclude(r => r.RecipeIngredients)
-                                .ThenInclude(i => i.Ingredient)
-                                .Select(ri => ri.Recipe)
-                                .Distinct()
-                                .ToList();
-
-                    if (recipeList.Count < 1)
-                    {
-                        TempData["NoRecipiesError"] = "NO RECIPIES WERE FOUND THAT HAD THE INGREDIENTS YOU SELECTED.";
-                    }
-                        foreach (var recipe in recipeList)
-                        {
-                            RecipeListViewModel recipeToAdd = new RecipeListViewModel();
-
-                            recipeToAdd.RecipeId = recipe.RecipeId;
-                            recipeToAdd.Name = recipe.Name;
-                            recipeToAdd.Picture = recipe.Picture;
-                            recipeToAdd.Ingredients = recipe.RecipeIngredients.Select(i => i.Ingredient);
-
-                            var ingredientsInRecipeCount = recipeToAdd.Ingredients.Count();
-                            var selectedIngredientsInRecipeCount = 0;
-
-                            foreach (Ingredient ingredient in recipeToAdd.Ingredients)
-                            {
-                                foreach (Ingredient selectedIngredient in pickIngredientsViewModel.SelectedIngredients)
-                                {
-                                    if (ingredient.IngredientNameId == selectedIngredient.IngredientNameId)
-                                    {
-                                        selectedIngredientsInRecipeCount++;
-                                    }
-                                }
-                            }
-
-                            recipeToAdd.PercentIngredientMatch = selectedIngredientsInRecipeCount / (double)ingredientsInRecipeCount;
-
-                            recipeListViewModel.Add(recipeToAdd);
-                        }
-
-                        var recipeListViewOrdered = recipeListViewModel.OrderByDescending(r => r.PercentIngredientMatch);
-
-                        return View(recipeListViewOrdered);
+                    recipeListViewModel = CreateRecipeList(pickIngredientsViewModel.SelectedIngredients);
+                    
+                        return View(recipeListViewModel);
                     }
                 }
             
 
             return View();
+        }
+
+        private List<RecipeListViewModel> CreateRecipeList(List<Ingredient> selectedIngredients)
+        {
+            List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
+
+            List<Recipe> recipeList = _context.RecipeIngredients
+                               .Where(ri => selectedIngredients.Contains(ri.Ingredient))
+                               .Include(ri => ri.Recipe)
+                               .ThenInclude(r => r.RecipeIngredients)
+                               .ThenInclude(i => i.Ingredient)
+                               .Select(ri => ri.Recipe)
+                               .Distinct()
+                               .ToList();
+
+            if (recipeList.Count < 1)
+            {
+                TempData["NoRecipiesError"] = "NO RECIPIES WERE FOUND THAT HAD THE INGREDIENTS YOU SELECTED.";
+            }
+            foreach (var recipe in recipeList)
+            {
+                RecipeListViewModel recipeToAdd = new RecipeListViewModel();
+
+                recipeToAdd.RecipeId = recipe.RecipeId;
+                recipeToAdd.Name = recipe.Name;
+                recipeToAdd.Picture = recipe.Picture;
+                recipeToAdd.Ingredients = recipe.RecipeIngredients.Select(i => i.Ingredient);
+
+                var ingredientsInRecipeCount = recipeToAdd.Ingredients.Count();
+                var selectedIngredientsInRecipeCount = 0;
+
+                foreach (Ingredient ingredient in recipeToAdd.Ingredients)
+                {
+                    foreach (Ingredient selectedIngredient in selectedIngredients)
+                    {
+                        if (ingredient.IngredientNameId == selectedIngredient.IngredientNameId)
+                        {
+                            selectedIngredientsInRecipeCount++;
+                        }
+                    }
+                }
+
+                recipeToAdd.PercentIngredientMatch = selectedIngredientsInRecipeCount / (double)ingredientsInRecipeCount;
+
+                recipeListViewModel.Add(recipeToAdd);
+            }
+
+            return recipeListViewModel.OrderByDescending(r => r.PercentIngredientMatch).ToList();
         }
 
         [HttpGet]

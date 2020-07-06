@@ -38,6 +38,10 @@
     justify-content: flex-end;
 }
 
+.breadcrumb-item + .breadcrumb-item::before{
+    content: ">";
+}
+
 .pageMargin {
     margin: 10px 36px 10px 36px;
 }
