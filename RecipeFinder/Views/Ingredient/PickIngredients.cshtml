@@ -72,7 +72,7 @@
 
                         if (@Model.SelectedIngredients != null)
                         {
-                            for (var index = 0; @Model.SelectedIngredients.Count() > index; index++)
+                            for (var index = @Model.SelectedIngredients.Count() - 1; index > -1; index--)
                             {
                                 if (count > 3)
                                 {

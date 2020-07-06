@@ -184,18 +184,10 @@ a:hover p {
         outline: none;
     }
 
-/*/* Recipe Detail View*/
-
-/*.header-image {
-    background-image: url('images/IMG_8560.JPG');
-    background-size: cover;
-}*/
 
 .footerCopyright {
-/*    background: #6ab446;*/
     background-image: linear-gradient(#6ab446, #FFF);
     color: #FFF;
-    /*background: #d4d4d4;*/
     text-align: center;
     padding: 20px 5px 20px 5px;
     margin-top: 20px;
