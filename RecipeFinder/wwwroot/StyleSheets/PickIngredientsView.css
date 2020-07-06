@@ -42,10 +42,11 @@
     margin: 10px 36px 10px 36px;
 }
 
-.center {
+.centerWithPadding {
     margin: 0 auto;
     padding: 20px 0px 20px 0px;
 }
+
 
 .centerText {
     text-align: center;
@@ -62,6 +63,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.1em;
     margin-top: 10px;
+}
+
+.content{
+    width:100%;
 }
 
 .feature .subtitleText {
@@ -157,8 +162,16 @@ a:hover p {
     font-size: 16px;
 }
 
+@media only screen and (min-width:1100px){
+    .content {
+        width: 74%;
+    }
+
+}
+
+
 @media only screen and (max-width: 600px) {
-    .center {
+    .centerWithPadding {
         width: 400px;
     }
 

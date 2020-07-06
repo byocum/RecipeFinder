@@ -118,7 +118,7 @@ namespace RecipeFinder.Controllers
             {
                 if (ingredient.NamePlural == pickIngredientsViewModel.SelectedIngredient)
                 {
-                    ModelState.AddModelError("SelectedIngredient", pickIngredientsViewModel.SelectedIngredient + " HAS ALREADY BEEN SELECTED");
+                    ModelState.AddModelError("SelectedIngredient", pickIngredientsViewModel.SelectedIngredient.ToUpper() + " HAS ALREADY BEEN SELECTED");
                     isIngredientAlreadySelected = true;
                 }
             }
