@@ -110,22 +110,18 @@ input {
     list-style-type: none;
 }
 
-btn{
-    margin-top:10px;
+btn {
+    margin-top: 10px;
 }
 
 .btn-light {
-    /*background-color: #6ab446;*/
-    /*background-color: #E88717;*/
-    /*background-color: #757d7a;*/
-    background-color: #c8720e;
+    background-color: #E88717;
     color: #FFF;
+    font-weight:bold;
 }
 
     .btn-light:hover {
-        /*background-color: #73ba4f;*/
-        /*background-color: #8d9693;*/
-        background-color: #cf760e;
+        background-color: #F58E18;
         color: #fff;
     }
 
@@ -197,7 +193,7 @@ a:hover p {
 
 .footerCopyright {
     background: #6ab446;
-    color:#FFF;
+    color: #FFF;
     /*background: #d4d4d4;*/
     text-align: center;
     padding: 20px 5px 20px 5px;
