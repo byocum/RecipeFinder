@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +20,7 @@ namespace RecipeFinder.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public ViewResult RecipeList()
         {
             List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
@@ -39,35 +39,6 @@ namespace RecipeFinder.Controllers
             {
                 TempData["NoRecipiesError"] = "NO RECIPIES WERE FOUND.";
             }
-
-            return View();
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ActionName("RecipeList")]
-        public async Task<IActionResult> RecipeList_Post()
-        {
-            List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
-            PickIngredientsViewModel pickIngredientsViewModel = new PickIngredientsViewModel();
-
-            if (await TryUpdateModelAsync<PickIngredientsViewModel>(pickIngredientsViewModel))
-            {
-                if (pickIngredientsViewModel.SelectedIngredients is null)
-                {
-                    TempData["SelectedIngredientError"] = "No ingredients specified for search.";
-                    return RedirectToAction("PickIngredients", "Ingredient");
-                }
-                else
-                {
-
-                    recipeListViewModel = CreateRecipeList(pickIngredientsViewModel.SelectedIngredients);
-                    
-                        return View(recipeListViewModel);
-                    }
-                }
-            
 
             return View();
         }

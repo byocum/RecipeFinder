@@ -53,7 +53,6 @@ namespace RecipeFinder.Controllers
 
             bool isIngredientInARecipe = false;
             bool isIngredientAlreadySelected = false;
-            Ingredient selectedIngredient = null;
 
             if (await TryUpdateModelAsync<PickIngredientsViewModel>(pickIngredientsViewModel))
             {
@@ -62,6 +61,7 @@ namespace RecipeFinder.Controllers
                 {
                     ModelState.AddModelError("SelectedIngredient", "SELECT AN INGREDIENT");
                     HttpContext.Session.Remove("SelectedIngredients");
+                    return View(pickIngredientsViewModel);
                 }
                 else
                 {
@@ -72,22 +72,17 @@ namespace RecipeFinder.Controllers
 
                     if (isIngredientInARecipe && !isIngredientAlreadySelected)
                     {
-                        selectedIngredient = await _context.Ingredients
-                            .Where(i => i.NamePlural == pickIngredientsViewModel.SelectedIngredient)
-                            .SingleOrDefaultAsync();
-
-                        pickIngredientsViewModel.SelectedIngredients.Add(selectedIngredient);
-
-                        pickIngredientsViewModel.SelectedIngredient = "";
-                        ModelState.Remove("SelectedIngredient");
+                        AddSelectedIngredientToSession(pickIngredientsViewModel.SelectedIngredient, pickIngredientsViewModel.SelectedIngredients);
+                    }
+                    else
+                    {
+                        return View(pickIngredientsViewModel);
                     }
 
-                    var selectedIngredientsSerialized = JsonConvert.SerializeObject(pickIngredientsViewModel.SelectedIngredients);
-                    HttpContext.Session.SetString("SelectedIngredients", selectedIngredientsSerialized);
                 }
             }
 
-            return View(pickIngredientsViewModel);
+            return RedirectToAction("PickIngredients");
         }
 
         private bool IsIngredientInARecipe(PickIngredientsViewModel pickIngredientsViewModel)
@@ -126,6 +121,20 @@ namespace RecipeFinder.Controllers
             return isIngredientAlreadySelected;
         }
 
+        private void AddSelectedIngredientToSession(string ingredient, List<Ingredient> selectedIngredients)
+        {
+            Ingredient selectedIngredient = null;
+
+            selectedIngredient = _context.Ingredients
+                .Where(i => i.NamePlural == ingredient)
+                .SingleOrDefault();
+
+            selectedIngredients.Add(selectedIngredient);
+
+            var selectedIngredientsSerialized = JsonConvert.SerializeObject(selectedIngredients);
+            HttpContext.Session.SetString("SelectedIngredients", selectedIngredientsSerialized);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteIngredientFromSearch(string btnIngredientName)
@@ -145,7 +154,7 @@ namespace RecipeFinder.Controllers
 
                 if (ingredientToDelete == null)
                 {
-                    ModelState.AddModelError("SelectedIngredients", "The ingredient could not be taken off the list.");
+                    ModelState.AddModelError("SelectedIngredients", "THE INGREDIENT COULD NOT BE TAKEN OFF THE LIST.");
                 }
                 else
                 {
@@ -155,12 +164,27 @@ namespace RecipeFinder.Controllers
                 }
             }
 
-            pickIngredientsViewModel.Ingredients = await _context.Ingredients
-                                    .OrderBy(i => i.IngredientNameId)
-                                    .ToListAsync();
-            ModelState.Clear();
+            return RedirectToAction("PickIngredients");
+        }
 
-            return View("PickIngredients", pickIngredientsViewModel);
+        [HttpGet]
+        public async Task<IActionResult> RecipeList()
+        {
+            List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
+            PickIngredientsViewModel pickIngredientsViewModel = new PickIngredientsViewModel();
+
+            if (await TryUpdateModelAsync<PickIngredientsViewModel>(pickIngredientsViewModel))
+            {
+                if (pickIngredientsViewModel.SelectedIngredients is null)
+                {
+                    TempData["SelectedIngredientError"] = "NO INGREDENTS WERE SPECIFIED.";
+                }
+                else
+                {
+                    return RedirectToAction("RecipeList", "Recipe");
+                }
+            }
+            return RedirectToAction("PickIngredients");
         }
     }
 }

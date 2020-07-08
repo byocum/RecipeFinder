@@ -49,9 +49,8 @@
                 <div class="row">
                     <div class="col-12">
                         @Html.ValidationMessageFor(m => m.SelectedIngredient, null, new { @class = "errorMessage" })
-                        <p class="subtitleText mt-5">YOUR INGREDIENTS</p>
 
-                        @*<button type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction="@Url.Action("RecipeList", "Recipe")">FIND RECIPE</button>*@
+                        <p class="subtitleText mt-5">YOUR INGREDIENTS</p>
                         @Html.ValidationMessageFor(m => m.SelectedIngredients, null, new { @class = "errorMessage" })
                         <span class="errorMessage">@TempData["SelectedIngredientError"]</span>
                     </div>
@@ -93,7 +92,7 @@
                 }
                 <div class="row">
                     <div class="col-12">
-                        <button id="btnFindRecipe" type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction="@Url.Action("RecipeList", "Recipe")">FIND RECIPE</button>
+                        <button id="btnFindRecipe" type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction="@Url.Action("RecipeList")" formmethod="get">FIND RECIPE</button>
                     </div>
                 </div>
             </div>
