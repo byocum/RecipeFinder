@@ -31,7 +31,7 @@ namespace RecipeFinder.Models
         [StringLength(15)]
         public string BakeTime { get; set; }
         
-        [Display(Name="MAKES")]
+        [Display(Name="SERVINGS")]
         [StringLength(15)]
         public string Servings { get; set; }
 
