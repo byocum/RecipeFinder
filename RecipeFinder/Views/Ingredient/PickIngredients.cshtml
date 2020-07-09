@@ -8,7 +8,7 @@
 <title>@ViewBag.Title</title>
 
 <header>
-    <div class="center homeTitle">
+    <div class="centerWithPadding homeTitle">
         <p class="titleText textUnderline">USE THE INGREDIENTS YOU HAVE!</p>
 
         <p class="subtitleText centerText">
@@ -19,73 +19,86 @@
 
 @using (Html.BeginForm())
 {
-<section class="ml-3 mr-3">
-    <label class="formLabel">PICK INGREDIENT</label>
-    <div class="input-group">
-        @Html.TextBoxFor(m => m.SelectedIngredient, new { autocomplete = "off", list = "dlSelectIngredient", @class = "form-control" })
-        <div class="input-group-prepend">
-            <button id="btnSelectIngredient" name="btnSelectIngredient" class="btn btn-outline-secondary" type="submit" formaction="@Url.Action("PickIngredients")">SELECT</button>
-        </div>
-
-        <datalist id="dlSelectIngredient">
-            @{
-                foreach (var ingredient in @Model.Ingredients)
-                {
-                    <option name="SelectedIngredients" value="@ingredient.NamePlural"></option>
-
-                }
-            }
-        </datalist>
-
-    </div>
-    @Html.ValidationMessageFor(m => m.SelectedIngredient, null, new { @class = "errorMessage" })
-
-
-    <button type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction ="@Url.Action("RecipeList", "Recipe")">FIND RECIPE</button>
-    @Html.ValidationMessageFor(m => m.SelectedIngredients, null, new { @class = "errorMessage" })
-    <span class="errorMessage">@TempData["SelectedIngredientError"]</span>
-
-    <div class="container">
-        @{
-            @:<div class="row">
-
-
-                var count = 1;
-                @Html.ValidationMessageFor(p => p.SelectedIngredients);
-
-                if (@Model.SelectedIngredients != null)
-                {
-                    for (var index = 0; @Model.SelectedIngredients.Count() > index; index++)
-                    {
-                        if (count > 3)
-                        {
-                            count = 1;
-                        @:</div>
-                        @:<div class="row">
-                        }
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="col-lg-12 col-md-12 col-sm-12 div-list grey-gradient">
-                                <label for="btnIngredientName" name="lblSelectedIngredient">
-                                    @Model.SelectedIngredients[index].NamePlural
-                                    @Html.HiddenFor(m => m.SelectedIngredients[index].IngredientNameId)
-                                    @Html.HiddenFor(m => m.SelectedIngredients[index].NamePlural)
-                                    @Html.HiddenFor(m => m.SelectedIngredients[index].RecipeIngredients)
-                                </label>
-                                <button class="grey-gradient" id="btnIngredientName" name="btnIngredientName" formaction=@Url.Action("DeleteIngredientFromSearch") formmethod="post" value="@Model.SelectedIngredients[index].NamePlural">X</button>
+    <section class="ml-3 mr-3">
+        <div class="content centerWithPadding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <label class="formLabel">PICK INGREDIENT</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button id="btnSelectIngredient" name="btnSelectIngredient" class="btn btn-outline-secondary" type="submit" formaction="@Url.Action("PickIngredients")">SELECT</button>
                             </div>
+
+                            @Html.TextBoxFor(m => m.SelectedIngredient, new { autocomplete = "off", list = "dlSelectIngredient", @class = "form-control" })
+
+
+                            <datalist id="dlSelectIngredient">
+                                @{
+                                    foreach (var ingredient in @Model.Ingredients)
+                                    {
+                                        <option name="SelectedIngredients" value="@ingredient.NamePlural"></option>
+
+                                    }
+                                }
+                            </datalist>
                         </div>
+                    </div>
+                </div>
 
-                        count++;
-                    }
+                <div class="row">
+                    <div class="col-12">
+                        @Html.ValidationMessageFor(m => m.SelectedIngredient, null, new { @class = "errorMessage" })
+
+                        <p class="subtitleText mt-5">YOUR INGREDIENTS</p>
+                        @Html.ValidationMessageFor(m => m.SelectedIngredients, null, new { @class = "errorMessage" })
+                        <span class="errorMessage">@TempData["SelectedIngredientError"]</span>
+                    </div>
+                </div>
+
+                @{
+                    @:<div class="row">
+
+                        var count = 1;
+                        @Html.ValidationMessageFor(p => p.SelectedIngredients);
+
+                        if (@Model.SelectedIngredients != null)
+                        {
+                            for (var index = @Model.SelectedIngredients.Count() - 1; index > -1; index--)
+                            {
+                                if (count > 3)
+                                {
+                                    count = 1;
+                                @:</div>
+                                @:<div class="row">
+                                }
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 div-list grey-gradient">
+                                        <label for="btnIngredientName" name="lblSelectedIngredient">
+                                            @Model.SelectedIngredients[index].NamePlural
+                                            @Html.HiddenFor(m => m.SelectedIngredients[index].IngredientNameId)
+                                            @Html.HiddenFor(m => m.SelectedIngredients[index].NamePlural)
+                                            @Html.HiddenFor(m => m.SelectedIngredients[index].RecipeIngredients)
+                                        </label>
+                                        <button class="grey-gradient" id="btnIngredientName" name="btnIngredientName" formaction=@Url.Action("DeleteIngredientFromSearch") formmethod="post" value="@Model.SelectedIngredients[index].NamePlural">X</button>
+                                    </div>
+                                </div>
+
+                                count++;
+                            }
+                        }
+
+                    @:</div>
                 }
+                <div class="row">
+                    <div class="col-12">
+                        <button id="btnFindRecipe" type="submit" class="btn btn-light btn-block mb-3 mt-3" formaction="@Url.Action("RecipeList")" formmethod="get">FIND RECIPE</button>
+                    </div>
+                </div>
+            </div>
 
-            @:</div>
-        }
-
-    </div>
-
-    <button type="submit" class="btn btn-light btn-block" formaction ="@Url.Action("RecipeList", "Recipe")">FIND RECIPE</button>
-</section>
+        </div>
+    </section>
 }
 
 @*<script>

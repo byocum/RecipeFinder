@@ -1,46 +1,52 @@
 ﻿@model IEnumerable<RecipeFinder.Models.ViewModels.RecipeListViewModel>;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<body>
-    <div class="container-fluid feature">
-        <header>
-            <p class="titleText">Recipies</p>
-            <span class="errorMessage">@TempData["NoRecipiesError"]</span>
-        </header>
-        <form asp-action="RecipeDetail" asp-controller="Recipe" method="get">
-            @{
-                @:<div class="row">
+    <body>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("PickIngredients", "Ingredient")">PICK INGREDIENTS</a>
+                </li>
+                <li class="breadcrumb-item active">RECIPE LIST</li>
+            </ol>
+        </nav>
+        <div class="container-fluid feature">
 
+            <header>
+                <p class="titleText">Recipies</p>
+                <span class="errorMessage">@TempData["NoRecipiesError"]</span>
+            </header>
+            <form asp-action="RecipeDetail" asp-controller="Recipe" method="get">
+                @{
+                    @:<div class="row">
 
+                        var count = 1;
 
-
-                    var count = 1;
-
-                    if (@Model != null)
-                    {
-                        foreach (var recipe in @Model)
+                        if (@Model != null)
                         {
-                            if (count > 3)
+                            foreach (var recipe in @Model)
                             {
-                                count = 1;
-                            @:</div>
-                            @:<div class="row">
+                                if (count > 3)
+                                {
+                                    count = 1;
+                                @:</div>
+                                @:<div class="row">
+                                }
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+
+                                    <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId">
+                                        <img class="img-fluid" src="~/Images/Recipe/@recipe.Picture" />
+                                        <p class="listImageHeading">@Html.DisplayFor(r => recipe.Name)</p>
+                                        <p class="listImageText">@Html.DisplayFor(r => recipe.PercentIngredientMatch) Ingredient Match</p>
+                                    </a>
+                                </div>
+
+                                count++;
                             }
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId" target="_blank">
-                                    <img class="img-fluid" src="~/Images/Recipe/@recipe.Picture" />
-                                    <p class="listImageHeading">@Html.DisplayFor(r => recipe.Name)</p>
-                                    <p class="listImageText">@Html.DisplayFor(r => recipe.PercentIngredientMatch) Ingredient Match</p>
-                                </a>
-                            </div>
-
-                            count++;
                         }
-                    }
 
-                @:</div>
-            }
-        </form>
-    </div>
-</body>
+                    @:</div>
+                }
+            </form>
+        </div>
+    </body>

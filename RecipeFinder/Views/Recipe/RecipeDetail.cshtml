@@ -1,75 +1,102 @@
 ﻿@model RecipeFinder.Models.Recipe
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("PickIngredients", "Ingredient")">PICK INGREDIENTS</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("RecipeList", "Recipe")">RECIPE LIST</a>
+        </li>
+        <li class="breadcrumb-item active">@Html.Encode(@Model.Name).ToUpper()</li>
 
-    <div class="pageMargin">
-        <header>
-            <p class="titleText">@Html.DisplayFor(model => model.Name)</p>
-        </header>
-        <article>
-            <div class="row d-block" style="overflow:hidden;">
-                <div class="col-lg-8 col-md-8 col-sm-12 float-right rightColumnGutter">
-                    <img class="img-fluid" src="~/Images/Recipe/@Model.Picture" />
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 float-left leftColumnGutter">
-                    <p class="subtitleText">DETAILS</p>
-                    <dl class="row">
-                        <dt class="col-sm-6 col-lg-3">
+    </ol>
+</nav>
+<div class="pageMargin">
+
+    <header>
+        <p class="titleText">@Html.DisplayFor(model => model.Name)</p>
+    </header>
+
+    <article>
+        <div class="row d-block" style="overflow:hidden;">
+            <div class="col-lg-8 col-md-8 col-sm-12 float-right rightColumnGutter">
+                <img class="img-fluid" src="~/Images/Recipe/@Model.Picture" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 float-left leftColumnGutter">
+                <p class="subtitleText">DETAILS</p>
+                <dl class="row">
+
+                    @if (!string.IsNullOrEmpty(Model.PrepTime))
+                    {
+
+                        <dt class="col-sm-3 col-lg-4">
                             @Html.DisplayNameFor(model => model.PrepTime)
                         </dt>
-                        <dd class="col-sm-6 col-lg-9">
+                        <dd class="col-sm-9 col-lg-8">
                             @Html.DisplayFor(model => model.PrepTime)
                         </dd>
-                        <dt class="col-sm-6 col-lg-3">
-                            @Html.DisplayNameFor(model => model.BakeTime)
-                        </dt>
-                        <dd class="col-sm-6 col-lg-9">
-                            @Html.DisplayFor(model => model.BakeTime)
-                        </dd>
-                        <dt class="col-sm-6 col-lg-3">
-                            @Html.DisplayNameFor(model => model.Servings)
-                        </dt>
-                        <dd class="col-sm-6 col-lg-9">
-                            @Html.DisplayFor(model => model.Servings)
-                        </dd>
-                    </dl>
-
-                    <p class="subtitleText">INGREDIENTS</p>
-
-                    @foreach (var recipeIngredient in Model.RecipeIngredients)
-                    {
-                        if (recipeIngredient.IngredientNameId == recipeIngredient.IngredientNameId)
-                        {
-                            if (recipeIngredient.IsIngredientNamePlural)
-                            {
-                                @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.NamePlural)
-                                @:<br />
-                            }
-                            else
-                            {
-                                @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.IngredientNameId);
-                                @:<br />
-                            }
-
-                        }
                     }
 
-                </div>
+                    @if (!string.IsNullOrEmpty(Model.BakeTime))
+                    {
+                        <dt class="col-sm-3 col-lg-4">
+                            @Html.DisplayNameFor(model => model.BakeTime)
+                        </dt>
+                        <dd class="col-sm-9 col-lg-8">
+                            @Html.DisplayFor(model => model.BakeTime)
+                        </dd>
+                    }
 
+                    @if (!string.IsNullOrEmpty(Model.Servings))
+                    {
+                        <dt class="col-sm-3 col-lg-4">
+                            @Html.DisplayNameFor(model => model.Servings)
+                        </dt>
+                        <dd class="col-sm-9 col-lg-8">
+                            @Html.DisplayFor(model => model.Servings)
+                        </dd>
+                    }
 
-                <div class="col-lg-8 col-md-8 col-sm-12 float-right">
-                    <p class="subtitleText">DIRECTIONS</p>
-                    <div>
-                        @foreach (string line in ViewBag.RecipeDirections)
+                </dl>
+
+                <p class="subtitleText">INGREDIENTS</p>
+
+                @foreach (var recipeIngredient in Model.RecipeIngredients)
+                {
+                    if (recipeIngredient.IngredientNameId == recipeIngredient.IngredientNameId)
+                    {
+                        if (recipeIngredient.IsIngredientNamePlural)
                         {
-                            @line
-                            <br />
+                            @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.NamePlural)
+                            @:<br />
                         }
-                    </div>
-                </div>                
-                <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+                        else
+                        {
+                            @(recipeIngredient.Amount + " " + recipeIngredient.Ingredient.IngredientNameId);
+                            @:<br />
+                        }
+
+                    }
+                }
+
+            </div>
+
+
+            <div class="col-lg-8 col-md-8 col-sm-12 float-right">
+                <p class="subtitleText">DIRECTIONS</p>
+                <div>
+                    @foreach (string line in ViewBag.RecipeDirections)
+                    {
+                        @line
+                        <br />
+                    }
                 </div>
             </div>
-        </article>
-    </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+            </div>
+        </div>
+    </article>
+</div>
 
