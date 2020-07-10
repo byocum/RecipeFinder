@@ -9,7 +9,16 @@
     color: #FF0000;
 }
 
-/*--- navigation bar ---*/
+/* Header */
+header{
+    position: fixed;
+    width:100%;
+    z-index:1;
+    top:0;
+}
+
+
+/* Navigation Bar */
 .navbar {
     background: #6ab446;
 }
@@ -38,12 +47,15 @@
     justify-content: flex-end;
 }
 
-.breadcrumb-item + .breadcrumb-item::before{
+
+.breadcrumb-item + .breadcrumb-item::before {
     content: ">";
 }
 
 .pageMargin {
     margin: 10px 36px 10px 36px;
+    position: relative;
+    top: 90px;
 }
 
 .centerWithPadding {
@@ -121,7 +133,7 @@ btn {
 .btn-light {
     background-color: #E88717;
     color: #FFF;
-    font-weight:bold;
+    font-weight: bold;
 }
 
     .btn-light:hover {
@@ -189,12 +201,15 @@ a:hover p {
     }
 
 
+/* Footer */
 .footerCopyright {
     background-image: linear-gradient(#6ab446, #FFF);
     color: #FFF;
     text-align: center;
     padding: 20px 5px 20px 5px;
     margin-top: 20px;
-    height:264px;
+    height: 251px;
     clear: both;
+    position:relative;
+    top:90px;
 }
