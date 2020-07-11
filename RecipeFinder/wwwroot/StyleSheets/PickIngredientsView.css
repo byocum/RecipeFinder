@@ -55,7 +55,7 @@ header{
 .pageMargin {
     margin: 10px 36px 10px 36px;
     position: relative;
-    top: 90px;
+    top: 140px;
 }
 
 .centerWithPadding {
@@ -211,5 +211,5 @@ a:hover p {
     height: 251px;
     clear: both;
     position:relative;
-    top:90px;
+    top:140px;
 }

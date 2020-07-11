@@ -31,6 +31,49 @@
                 </ul>
             </div>
         </nav>
+        @if (ViewBag.NumFindRecipeBreadcrumbsDisplayed != null)
+        {
+            <nav>
+                <ol class="breadcrumb">
+                    @if (ViewBag.NumFindRecipeBreadcrumbsDisplayed > 0)
+                    {
+                        if (ViewBag.NumFindRecipeBreadcrumbsDisplayed == 1)
+                        {
+                            <li class="breadcrumb-item active">
+                                PICK INGREDIENTS
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-item">
+                                <a href="@Url.Action("PickIngredients", "Ingredient")">PICK INGREDIENTS</a>
+                            </li>
+                        }
+
+                    }
+                    @if (ViewBag.NumFindRecipeBreadcrumbsDisplayed > 1)
+                    {
+                        if (ViewBag.NumFindRecipeBreadcrumbsDisplayed == 2)
+                        {
+                            <li class="breadcrumb-item active">
+                                RECIPE LIST
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-item">
+                                <a href="@Url.Action("RecipeList", "Recipe")">RECIPE LIST</a>
+                            </li>
+                        }
+
+                    }
+                    @if (ViewBag.NumFindRecipeBreadcrumbsDisplayed == 3)
+                    {
+                        <li class="breadcrumb-item active">@Html.Encode(@Model.Name).ToUpper()</li>
+                    }
+                </ol>
+            </nav>
+        }
     </header>
     <content>
         <div class="pageMargin">
