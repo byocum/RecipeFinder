@@ -2,14 +2,6 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
     <body>
-        @*<nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="@Url.Action("PickIngredients", "Ingredient")">PICK INGREDIENTS</a>
-                </li>
-                <li class="breadcrumb-item active">RECIPE LIST</li>
-            </ol>
-        </nav>*@
         <div class="container-fluid feature">
                 <p class="titleText">Recipies</p>
                 <span class="errorMessage">@TempData["NoRecipiesError"]</span>
@@ -30,7 +22,6 @@
                                 @:<div class="row">
                                 }
                                 <div class="col-lg-4 col-md-4 col-sm-12">
-
                                     <a id="btnSelectRecipe" class="col-lg-12 col-md-12 col-sm-12 div-list" asp-action="RecipeDetail" asp-route-recipeId="@recipe.RecipeId">
                                         <img class="img-fluid" src="~/Images/Recipe/@recipe.Picture" />
                                         <p class="listImageHeading">@Html.DisplayFor(r => recipe.Name)</p>
