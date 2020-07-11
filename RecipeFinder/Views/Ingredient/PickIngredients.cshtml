@@ -1,21 +1,19 @@
 ﻿@model RecipeFinder.Models.ViewModels.PickIngredientsViewModel;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@*@addTagHelper *, AuthoringTagHelpers*@
 @{
     ViewBag.Title = "Use The Ingredients You Have";
 }
 
 <title>@ViewBag.Title</title>
 
-<header>
-    <div class="centerWithPadding homeTitle">
-        <p class="titleText textUnderline">USE THE INGREDIENTS YOU HAVE!</p>
+<div class="centerWithPadding homeTitle">
+    <p class="titleText textUnderline">USE THE INGREDIENTS YOU HAVE!</p>
 
-        <p class="subtitleText centerText">
-            FIND RECIPIES WITH THE INGREDIENTS IN YOUR KITCHEN
-        </p>
-    </div>
-</header>
+    <p class="subtitleText centerText">
+        FIND RECIPIES WITH THE INGREDIENTS IN YOUR KITCHEN
+    </p>
+</div>
+
 
 @using (Html.BeginForm())
 {
@@ -59,6 +57,7 @@
                 @{
                     @:<div class="row">
 
+
                         var count = 1;
                         @Html.ValidationMessageFor(p => p.SelectedIngredients);
 
@@ -96,52 +95,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 }
-
-@*<script>
-        $(function () {
-
-            $('#btnSelectIngredient').on('click', function () {
-                var val = document.getElementById('txtSelectIngredient').value;
-                var opts = document.getElementById('dlSelectIngredient').childNodes;
-                var isAnOption = false;
-                for (var i = 0; i < opts.length; i++) {
-                    if (opts[i].value === val) {
-                        // An item was selected from the list!
-                        // yourCallbackHere()
-                        isAnOption = true;
-                        break;
-                    }
-                }
-
-                if (isAnOption) {
-                    alert(val);
-                    return false;
-                } else {
-                    alert(val + " is not an ingredient option.")
-                    return false;
-                }
-            });
-
-            $('#txtSelectIngredient').keypress(function (e) {
-                var key = e.which;
-                if (key == 13) {
-                    $('#btnSelectIngredient').click();
-                    return false;
-                }
-            });
-
-            $('#dlSelectIngredient').on('click', function () {
-                $('#btnSelectIngredient').click();
-                return false;
-            });
-
-
-        });
-    </script>*@
 
 
 

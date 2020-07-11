@@ -23,9 +23,10 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public ViewResult RecipeList()
         {
+            ViewBag.NumFindRecipeBreadcrumbsDisplayed = 2;
             List<RecipeListViewModel> recipeListViewModel = new List<RecipeListViewModel>();
             var selectedIngredientsSession = HttpContext.Session.GetString("SelectedIngredients");
-
+            
 
             if (!string.IsNullOrEmpty(selectedIngredientsSession))
             {
@@ -42,6 +43,7 @@ namespace RecipeFinder.Controllers
 
             return View();
         }
+
 
         private List<RecipeListViewModel> CreateRecipeList(List<Ingredient> selectedIngredients)
         {
@@ -94,6 +96,8 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public IActionResult RecipeDetail(string recipeId)
         {
+            ViewBag.NumFindRecipeBreadcrumbsDisplayed = 3;
+
             RecipeViewModel recipeViewModel = new RecipeViewModel();
             Recipe recipeModel = new Recipe();
 

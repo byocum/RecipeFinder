@@ -78,7 +78,6 @@ namespace RecipeFinder.Controllers
                     {
                         return View(pickIngredientsViewModel);
                     }
-
                 }
             }
 
