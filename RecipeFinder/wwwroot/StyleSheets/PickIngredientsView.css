@@ -9,6 +9,12 @@
     color: #FF0000;
 }
 
+.noBulletList {
+    list-style-type: none;
+}
+
+
+
 /* Header */
 header{
     position: fixed;
@@ -47,11 +53,12 @@ header{
     justify-content: flex-end;
 }
 
-
+/* Breadcrumbs */
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">";
 }
 
+/* Page */
 .pageMargin {
     margin: 10px 36px 10px 36px;
     position: relative;
@@ -63,7 +70,13 @@ header{
     padding: 20px 0px 20px 0px;
 }
 
+.linkblock a{
+    display:block;
+}
+.content a{
+   
 
+}
 .centerText {
     text-align: center;
 }

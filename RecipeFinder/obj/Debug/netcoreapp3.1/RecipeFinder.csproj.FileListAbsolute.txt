@@ -1,6 +1,5 @@
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\RecipeFinder.exe
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\RecipeFinder.deps.json
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\bin\Debug\netcoreapp3.1\RecipeFinder.runtimeconfig.json
@@ -412,3 +411,6 @@ C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netc
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\RecipeFinder.dll
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\RecipeFinder.pdb
 C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\RecipeFinder.genruntimeconfig.cache
+C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\scopedcss\bundle\RecipeFinder.styles.css
+C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\Razor\Views\AddContent\Index.cshtml.g.cs
+C:\Users\byocu\source\repos\GitHubRepos\RecipeFinder\RecipeFinder\obj\Debug\netcoreapp3.1\Razor\Views\IngredientContent\IngredientContentList.cshtml.g.cs
