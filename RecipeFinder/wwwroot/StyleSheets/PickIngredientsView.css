@@ -7,12 +7,12 @@
 
 .errorMessage {
     color: #FF0000;
+    display:block;
 }
 
 .noBulletList {
     list-style-type: none;
 }
-
 
 
 /* Header */
@@ -132,7 +132,7 @@ label {
 }
 
 input {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .list_no_bullets {

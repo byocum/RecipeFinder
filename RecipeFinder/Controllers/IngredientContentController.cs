@@ -35,18 +35,14 @@ namespace RecipeFinder.Controllers
         [ActionName("AddIngredient")]
         public async Task<IActionResult> AddIngredient_Post(IngredientsListViewModel ingredientsListViewModel )
         {
-           
-
-
             if (await TryUpdateModelAsync(ingredientsListViewModel.Ingredient))
             {
                 _context.Ingredients.Add(ingredientsListViewModel.Ingredient);
                 _context.SaveChanges();
-
             }
             else
             {
-                TempData["SelectedIngredientError"] = "ERROR.";
+                return View("IngredientContentList", ingredientsListViewModel);
             }
 
             return RedirectToAction("IngredientContentList", "IngredientContent");
