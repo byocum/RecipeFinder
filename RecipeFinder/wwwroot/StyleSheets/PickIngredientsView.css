@@ -213,6 +213,11 @@ a:hover p {
         outline: none;
     }
 
+    /* Forms */
+    .formLabel
+    {
+        display:block;
+    }
 
 /* Footer */
 .footerCopyright {

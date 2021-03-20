@@ -1,0 +1,15 @@
+﻿@model RecipeFinder.Models.Ingredient;
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label class="formLabel">@Html.DisplayNameFor(model => model.IngredientNameId)</label>
+        @Html.TextBoxFor(model => model.IngredientNameId)
+        <span asp-validation-for="IngredientNameId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="formLabel">@Html.DisplayNameFor(model => model.NamePlural)</label>
+        @Html.TextBoxFor(model => model.NamePlural)
+        <span asp-validation-for="NamePlural" class="text-danger"></span>
+    </div>
+
+
