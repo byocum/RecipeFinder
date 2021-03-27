@@ -42,6 +42,7 @@ namespace RecipeFinder.Controllers
             }
             else
             {
+                TempData["ShowAddIngredientModal"] = 1;
                 return View("IngredientContentList", ingredientsListViewModel);
             }
 

@@ -14,6 +14,7 @@
         @{
             @:<div class="row">
 
+
                 var count = 1;
                 @Html.ValidationMessageFor(p => p.Ingredients);
 
@@ -63,16 +64,15 @@
                 </div>
 
                 <div class="modal-body">
-                    <div asp-validation-summary="ModelOnly" class="errorMessage"></div>
                     <div class="form-group">
                         <label class="formLabel">@Html.DisplayNameFor(model => model.Ingredient.IngredientNameId)</label>
                         @Html.TextBoxFor(model => model.Ingredient.IngredientNameId)
-                    <span asp-validation-for="Ingredient.IngredientNameId" class="errorMessage"></span>
+                        <span asp-validation-for="Ingredient.IngredientNameId" class="errorMessage"></span>
                     </div>
                     <div class="form-group">
                         <label class="formLabel">@Html.DisplayNameFor(model => model.Ingredient.NamePlural)</label>
                         @Html.TextBoxFor(model => model.Ingredient.NamePlural)
-                    <span asp-validation-for="Ingredient.NamePlural" class="errorMessage"></span>
+                        <span asp-validation-for="Ingredient.NamePlural" class="errorMessage"></span>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -82,4 +82,12 @@
             </div>
         </div>
     </div>
+}
+
+@section customJavascript{
+    <script type="text/javascript">
+    if (@TempData["ShowAddIngredientModal"] == 1) {
+        $('#modalAddIngredient').modal({ show: true });
+    }
+    </script>
 }
